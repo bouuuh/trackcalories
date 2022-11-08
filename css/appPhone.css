@@ -1,0 +1,252 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.container{
+    background-image: url('../img/background.png');
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: grayscale(70%);
+    
+}
+.content{
+    background-color:rgba(0, 0, 0, 0.50);
+    height: 100vh;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 30vh;
+}
+.connexion{
+    width: 70vw;
+    height: 5.5vh;
+    font-size: 20px;
+    font-family: 'Work Sans';
+    color: white;
+    background-color: #e28213;
+    border-radius: 20px;
+    border: 0;
+    margin-bottom: 3vh;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.logoaccueil{
+    width: 80vw;
+    padding-top: 35vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.signin form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.signin form input{
+    width: 70vw;
+    height: 4.5vh;
+    border-radius: 15px;
+    border: 0;
+    margin-bottom: 3vh;
+    text-align: center;
+    font-family: 'Nunito';
+    color: #252525;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.logoinscription{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6vh;
+    margin-bottom: 15vh;
+}
+.container2{
+    background-color: #869B08;
+    height: 100vh;
+}
+.next{
+    margin-top: 4vh;
+    margin-bottom: 15vh;
+    width: 40vw;
+    height: 4.2vh;
+    border-radius: 14px;
+    background-color: #A5305C;
+    border: 0;
+    color: #FFF6E0;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    font-family: 'Work sans';
+    font-size: 16px;
+    font-weight: 400;
+}
+.container3{
+    background-color: #e28213;
+    height: 100vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
+.hello{
+    text-align: center;
+    color: #FFF6E0;
+    font-family: 'Nunito';
+    font-size: 35px;
+    font-weight: 300;
+    margin-bottom: 10vh;
+    
+}
+.hello span{
+    font-weight: 900;
+    
+}
+.almostdone{
+    text-align: center;
+    color: #FFF6E0;
+    font-family: 'Nunito';
+    font-size: 20px;
+    font-weight: 300;
+}
+.arrowback{
+    height: 4vh;
+    padding-top: 7vh;
+    
+    margin-bottom: 15vh;
+}
+.arrownext{
+    height: 5vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12vh;
+    margin-bottom: 6vh;
+}
+.sexe{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20vh;
+    margin-bottom: 2vh;
+}
+.sexe div{
+    display: flex;
+    margin-top: 2vh;
+    justify-content: space-around;
+}
+.birth{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+}
+.birth input{
+    margin-top: 2vh;
+    width: 38vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 3vh;
+    border-radius: 20px;
+    border: 0;
+}
+.height{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+}
+.height input{
+    margin-top: 2vh;
+    width: 38vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 3vh;
+    border-radius: 20px;
+    border: 0;
+}
+.weight{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+}
+.weight input{
+    margin-top: 2vh;
+    width: 38vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 3vh;
+    border-radius: 20px;
+    border: 0;
+}
+input[type=radio] { 
+    display: none;
+}
+input[type=radio] + label {
+    padding: 4px;
+    
+}
+input[type=radio]:checked + label {
+    padding: 2px;
+    border: 2px solid #A5305C;
+}
+form div label{
+    font-family: 'Work Sans';
+    color: #FFF6E0;
+}
+.logoinscription2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4vh;
+}
+.container4{
+    background-color: #869B08;
+    height: 100vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+}
+.container5{
+    background-color: #A5305C;
+    height: 100vh;
+}
+.noaccount{
+    display: flex;
+    justify-content: center;
+}
+.noaccount a{
+    color: #FFF6E0;
+    font-family: 'Nunito';
+    font-size: 12px;
+   text-align: center;
+}
+.connect{
+    margin-top: 4vh;
+    margin-bottom: 25vh;
+    width: 40vw;
+    height: 4.2vh;
+    border-radius: 14px;
+    background-color: #869B08;
+    border: 0;
+    color: #FFF6E0;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    font-family: 'Work sans';
+    font-size: 16px;
+    font-weight: 400;
+}
+.logoconnexion{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6vh;
+    margin-bottom: 22vh;
+    height: 10vh;
+}
+.mdpforgotten{
+    color: #FFF6E0;
+    font-family: 'Nunito';
+    font-size: 12px;
+}
