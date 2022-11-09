@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,7 +17,9 @@
     <div class="container4">
         <a href="inscriptionPhone.php"><img src="img/arrowleft2.svg" alt="" class="arrowback"></a>
         <div class="content2">
-           <p class="hello">Bravo <span>Prénom</span> !</p>
+        <?php
+            echo "<p class='hello'>Bravo ".$_SESSION['user']['surname']."</p>";
+            ?>
            <p class="almostdone">Ton inscription est terminée ! 
             Tu vas pouvoir maintenant avoir accès à l’application.</p>
             <a href=""><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>

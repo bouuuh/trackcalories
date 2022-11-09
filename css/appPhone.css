@@ -151,6 +151,7 @@
     height: 3vh;
     border-radius: 20px;
     border: 0;
+    text-align: center;
 }
 .height{
     display: flex;
@@ -166,6 +167,7 @@
     height: 3vh;
     border-radius: 20px;
     border: 0;
+    text-align: center;
 }
 .weight{
     display: flex;
@@ -181,6 +183,7 @@
     height: 3vh;
     border-radius: 20px;
     border: 0;
+    text-align: center;
 }
 input[type=radio] { 
     display: none;
@@ -249,4 +252,10 @@ form div label{
     color: #FFF6E0;
     font-family: 'Nunito';
     font-size: 12px;
+}
+.empty{
+    color: #A5305C;
+    font-family: 'Nunito';
+    font-size: 12px;
+    margin-top: -12px;
 }

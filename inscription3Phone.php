@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    include('connexion.php');
+    $user_sexe = $_POST['sexe']; 
+    $user_dateofbirth = $_POST['dateofbirth']; 
+    $user_height =$_POST['height'];
+    $user_weight = $_POST['weight'];     
+    if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) {    
+        $etat = $base->prepare("UPDATE `utilisateur` SET `sexe`=:sexe,`date de naissance`=:naissance,`taille`=:taille,`poids`=:poids WHERE `id`=:id");
+        $etat->bindValue(':sexe', $user_sexe,PDO::PARAM_STR);
+        $etat->bindValue(':naissance', $user_dateofbirth,PDO::PARAM_STR);
+        $etat->bindValue(':taille', $user_height,PDO::PARAM_STR);
+        $etat->bindValue(':weight', $user_weight,PDO::PARAM_STR);
+        $etat->bindValue(':id', $_SESSION['user']['id'],PDO::PARAM_STR);
+        $etat->execute();  
+        header('Location: inscription4Phone.php');
+    }
+    
+    
+    ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,5 +60,6 @@
         </div> 
     <img class="logoinscription2" src="img\Logorose.svg" alt="Track Calories logo">
     </div>
+   
 </body>
 </html>

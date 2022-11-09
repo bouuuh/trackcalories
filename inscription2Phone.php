@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,14 +15,20 @@
 </head>
 <body>
     <div class="container3">
-        <a href="inscriptionPhone.php"><img src="img/arrowleft2.svg" alt="" class="arrowback"></a>
+        <a href="inscription1Phone.php"><img src="img/arrowleft2.svg" alt="" class="arrowback"></a>
         <div class="content2">
-           <p class="hello">Bonjour <span>Prénom</span> !</p>
+            <?php
+            echo "<p class='hello'>Bonjour ".$_SESSION['user']['surname']."</p>";
+            ?>
+           
            <p class="almostdone">Ton inscription est bientôt finie mais nous avons besoin d’informations supplémentaires pour créer ton profil :)</p>
-            <a href=""><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>
+            <a href="inscription3Phone.php"><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>
       
         </div> 
     <img class="logoinscription" src="img\Logorose.svg" alt="Track Calories logo">
     </div>
+    <?php
+    
+    ?>
 </body>
 </html>
