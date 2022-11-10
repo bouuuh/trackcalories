@@ -3,7 +3,7 @@ $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
 $user = 'greta';
 $password = 'Greta1234!';
 
-/* Connexion */
+/* Connexion 2 */
 
 try {
     $base = new PDO($dbb, $user, $password);
