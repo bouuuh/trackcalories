@@ -15,8 +15,8 @@ session_start();
 </head>
 <body>
     <div class="container4">
-        <a href="inscriptionPhone.php"><img src="img/arrowleft2.svg" alt="" class="arrowback"></a>
-        <div class="content2">
+        
+        <div class="content4">
         <?php
             echo "<p class='hello'>Bravo ".$_SESSION['user']['surname']."</p>";
             ?>

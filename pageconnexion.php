@@ -23,7 +23,7 @@
             </form>
         </div>
         <div class="noaccount">
-            <a href="inscriptionPhone.php">Pas de compte ? <br>Inscrivez-vous</a>
+            <a href="inscription1Phone.php">Pas de compte ? <br>Inscrivez-vous</a>
         </div>
         </div>
     </div>

@@ -1,17 +1,18 @@
 <?php
     session_start();
     include('connexion.php');
-    $user_sexe = $_POST['sexe']; 
-    $user_dateofbirth = $_POST['dateofbirth']; 
-    $user_height =$_POST['height'];
-    $user_weight = $_POST['weight'];     
+    $user_sexe = valid_donnees($_POST['sexe']); 
+    $user_dateofbirth = valid_donnees($_POST['dateofbirth']); 
+    $user_height =valid_donnees($_POST['height']);
+    $user_weight = valid_donnees($_POST['weight']); 
+    $user_id = $_SESSION['user']['id'];    
     if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) {    
-        $etat = $base->prepare("UPDATE `utilisateur` SET `sexe`=:sexe,`date de naissance`=:naissance,`taille`=:taille,`poids`=:poids WHERE `id`=:id");
-        $etat->bindValue(':sexe', $user_sexe,PDO::PARAM_STR);
-        $etat->bindValue(':naissance', $user_dateofbirth,PDO::PARAM_STR);
-        $etat->bindValue(':taille', $user_height,PDO::PARAM_STR);
-        $etat->bindValue(':weight', $user_weight,PDO::PARAM_STR);
-        $etat->bindValue(':id', $_SESSION['user']['id'],PDO::PARAM_STR);
+        $etat = $base->prepare("UPDATE utilisateur SET `sexe`= :sexe,`date de naissance`= :naissance,`taille`= :taille,`poids`= :poids WHERE `id`= :id");
+        $etat->bindParam(':sexe',$user_sexe);
+        $etat->bindParam(':naissance',$user_dateofbirth);
+        $etat->bindParam(':taille',$user_height);
+        $etat->bindParam(':poids',$user_weight);
+        $etat->bindParam(':id',$user_id);
         $etat->execute();  
         header('Location: inscription4Phone.php');
     }
@@ -33,7 +34,7 @@
 <body>
     <div class="container3">
         <div class="content3">
-           <form action="" method="post">
+           <form action="inscription3Phone.php" method="post">
             <div class="sexe">
                 <label for="sexe">Sexe</label>
                 <div>
@@ -54,8 +55,11 @@
                 <label for="weight">Poids (kg)</label>
                 <input type="text" name="weight">  
             </div>
+            <div class="btnArrow">
+            <button type="submit" id="arrowSubmit"><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></button>
+            </div>
            </form>
-            <a href=""><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>
+            
       
         </div> 
     <img class="logoinscription2" src="img\Logorose.svg" alt="Track Calories logo">
