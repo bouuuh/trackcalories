@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="FR">
 <head>
@@ -11,7 +14,7 @@
     <title>TrackCalories - Profil</title>
 </head>
 <body class="profil">
-    <img class="logoinscription" src="img/logo.svg">
+    <img class="logoinscription4" src="img/logo.svg">
     <div class="encadre_imc">
         <p>Aujourd'hui vous êtes à :</p>
         <p class="number_imc">300 kcal</p>

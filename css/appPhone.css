@@ -270,11 +270,22 @@ form div label{
 .content4{
     padding-top: 26vh;
 }
-<<<<<< julien
-/* ------------------------------------------------ Profil version mobile  ------------------------------- */
-
-                                                /* PAGE PHONE : PROFIL IMC */
-
+.logoinscription3{
+    height: 7vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4vh;
+    margin-bottom: 7vh;
+}
+.logoinscription4{
+    height: 7vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4vh;
+    margin-bottom: 19vh;
+}
 body.profil {
     background-color: #A5305C;
     font-family: 'Work sans';
@@ -287,31 +298,33 @@ body.profil > p > span {
 p {
     text-align: center;
     color: white;
-    font-size: 22px;
-    padding: 0 10px;
+    font-size: 1.3em;
+    padding: 0 1vh;
 }
 
 div.encadre_imc {
-    width: 375px;
-    height: 150px;
+    width: 80vw;
+    height: 15vh;
     background: #FFF;
-    padding: 20px;
-    margin: 50px auto;
+    padding: 2vh;
+    margin: 8vh auto;
     border-radius: 30px;
 }
 
 div.encadre_imc > p {
     color: black;
+    padding-top: 2vh;
+    font-size: 1.5em;
 }
 
 div.encadre_imc > p.number_imc {
     color:#A5305C;
     font-size: 40px;
-    margin-top: 50px;
+    margin-top: 1.5vh;
 }
 
 div.change_poids {
-    margin: 100px auto 0 auto;
+    margin: 9vh auto 0 auto;
     text-align: center;
 }
 
@@ -323,23 +336,24 @@ div.change_poids > div.enter_poids {
 
 div.change_poids > div.enter_poids > img {
    height: 10%;
-   margin-top: 30px;
-   margin-left: 10px;
+   margin-top: 3vh;
+   margin-left: 1vw;
 }
 
 div.change_poids > div.enter_poids > input {
-    width: 300px;
+    width: 30vw;
+    height: 2vh;
     border-radius: 40px;
     border: none;
-    padding: 20px;
-    margin-top: 30px;
+    padding: 2vh;
+    margin-top: 3vh;
 }
 
 div.nav_profil {
     background-color: white;
     border-radius: 30px 30px 0 0;
     width: 100%;
-    height: 75px;
+    height: 7.5vh;
     position: fixed;
     bottom: 0;
 }
@@ -349,11 +363,10 @@ div.nav_profil > div.logo_profil {
     justify-content: space-between;
     padding: 0 40px;
     position: relative;
-    top: -35px;
+    top: -4.5vh;
 }
 
-/* ---- */ 
-=======
+
 #arrowSubmit{
    background-color: #e28213;
    border: 0;
@@ -365,4 +378,3 @@ div.nav_profil > div.logo_profil {
 .content4{
     padding-top: 26vh;
 }
->>>>>>> master

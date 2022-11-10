@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="FR">
 <head>
@@ -11,8 +14,11 @@
     <title>TrackCalories - Profil</title>
 </head>
 <body class="profil">
-    <img class="logoinscription" src="img/logo.svg">
-    <p>Bonjour <span>Prénom !</span> :)</p>
+    <img class="logoinscription3" src="img/logo.svg">
+    <?php
+            echo "<p>Bonjour <span>".$_SESSION['user']['surname']."</span> :)</p>";
+            ?>
+  
     <div class="encadre_imc">
         <p>Votre IMC est de :</p>
         <p class="number_imc">16</p>

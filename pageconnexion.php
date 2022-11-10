@@ -1,3 +1,30 @@
+<?php
+session_start();
+include('connexion.php');
+$user_mail = valid_donnees($_POST['mail']);
+$user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
+$user_password = valid_donnees($_POST['password']); 
+
+if (!empty($user_mail) && !empty($user_password)) {
+    $etat = $base->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :adresse");
+    $etat->bindParam(':adresse',$user_mail);
+    $etat->execute();
+$resultats = $etat->fetchAll();
+$mail_bdd = $resultats[0]['adresse mail'];
+$password_bdd = $resultats[0]['mot de passe'];
+
+
+if (!empty($resultats)) {
+    if ($password_bdd === $user_password) {
+        echo "yes";
+    }
+}
+
+
+}   
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,11 +42,11 @@
         <div class="content2">
             <img class="logoconnexion" src="img\Logo.svg" alt="Track Calories logo">
             <div class="signin">
-            <form action="connexion.php" method="post">
+            <form action="" method="post">
                 <input type="mail" name="mail" placeholder="Entrez votre adresse mail">
                 <input type="password" name="password" placeholder="Entrez votre mot de passe">
                 <p class="mdpforgotten">mot de passe oublié ?</p>
-                <a href="inscription2Phone.php"><button class="connect" type="submit">Connexion</button></a>
+                <button class="connect" type="submit">Connexion</button>
             </form>
         </div>
         <div class="noaccount">
