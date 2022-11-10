@@ -259,3 +259,14 @@ form div label{
     font-size: 12px;
     margin-top: -12px;
 }
+#arrowSubmit{
+   background-color: #e28213;
+   border: 0;
+}
+.btnArrow{
+    display: flex;
+    justify-content: center;
+}
+.content4{
+    padding-top: 26vh;
+}

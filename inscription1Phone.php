@@ -2,10 +2,13 @@
 session_start();
 include('connexion.php');
 
-$user_surname = $_POST['surname']; 
-$user_name = $_POST['name']; 
-$user_mail =$_POST['mail'];
-$user_password = $_POST['password']; 
+$user_surname = valid_donnees($_POST['surname']); 
+$user_name = valid_donnees($_POST['name']); 
+$user_mail =valid_donnees($_POST['mail']);
+$user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
+$user_password = valid_donnees($_POST['password']); 
+$user_passwordConfirm = valid_donnees($_POST['passwordconfirm']); 
+
 if(!empty($user_surname) && !empty($user_name) && !empty($user_mail) && !empty($user_password)){
 $etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail`, `mot de passe`) VALUES (:surname,:nom,:mail,:pass)");
 
@@ -44,7 +47,7 @@ header('Location: inscription2Phone.php');
         <div class="content2">
             <img class="logoinscription" src="img\Logorose.svg" alt="Track Calories logo">
             <div class="signin">
-            <form action="" method="post">
+            <form action="inscription1Phone.php" method="post">
                 <?php
                 if(empty($user_surname)){
                     echo '<p class="empty">Il manque un prénom</p>';
@@ -72,10 +75,14 @@ header('Location: inscription2Phone.php');
                 <?php
                 if(empty($user_password)){
                     echo '<p class="empty">Il manque une confirmation de mot de passe</p>';
+                };
+                if ($user_password != $user_passwordConfirm) {
+                    header('Location: inscription1Phone.php');
+                    echo '<p class="empty">Les mots de passe sont différents</p>';
                 }
                 ?>
                 <input type="password" name="passwordconfirm" placeholder="Confirmez votre mot de passe" >
-                <button class="next" type="submit">Suivant</button>
+                <button class="next" type="submit" name="next">Suivant</button>
             </form>
         </div>
         <div class="button-bottom">
