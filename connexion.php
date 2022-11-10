@@ -1,8 +1,8 @@
 <?php
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
-$user = 'greta';
-$password = 'Greta1234!';
-
+$user = 'root';
+$password = 'root';
+/* mdp change si on change d'ordi en local */
 
 
 try {
