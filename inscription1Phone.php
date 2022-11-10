@@ -49,35 +49,35 @@ header('Location: inscription2Phone.php');
             <div class="signin">
             <form action="inscription1Phone.php" method="post">
                 <?php
-                if(empty($user_surname)){
+                if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_surname)){
                     echo '<p class="empty">Il manque un prénom</p>';
                 }
                 ?>
                 <input type="text" name="surname" placeholder="Entrez votre prénom" value=<?= $user_surname ?? '' ?>>
                 <?php
-                if(empty($user_name)){
+                if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_name)){
                     echo '<p class="empty">Il manque un nom</p>';
                 }
                 ?>
                 <input type="text" name="name" placeholder="Entrez votre nom" value=<?= $user_name ?? '' ?>>
                 <?php
-                if(empty($user_mail)){
+                if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_mail)){
                     echo '<p class="empty">Il manque un mail</p>';
                 }
                 ?>
                 <input type="mail" name="mail" placeholder="Entrez votre adresse mail" value=<?= $user_mail ?? '' ?>>
                 <?php
-                if(empty($user_password)){
+                if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_password)){
                     echo '<p class="empty">Il manque un mot de passe</p>';
                 }
                 ?>
                 <input type="password" name="password" placeholder="Entrez votre mot de passe">
                 <?php
-                if(empty($user_password)){
+                if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_password)){
                     echo '<p class="empty">Il manque une confirmation de mot de passe</p>';
                 };
                 if ($user_password != $user_passwordConfirm) {
-                    header('Location: inscription1Phone.php');
+
                     echo '<p class="empty">Les mots de passe sont différents</p>';
                 }
                 ?>
