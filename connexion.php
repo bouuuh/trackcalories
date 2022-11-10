@@ -1,7 +1,7 @@
 <?php
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
-$user = 'greta';
-$password = 'Greta1234!';
+$user = 'root';
+$password = 'root';
 
 /* Connexion */
 
@@ -11,6 +11,10 @@ try {
     echo 'erreur connexion' .$excep-> getMessage();
 }
 
-
-
+function valid_donnees($donnees){
+    $donnees = trim($donnees);
+    $donnees = stripslashes($donnees);
+    $donnees = htmlspecialchars($donnees);
+    return $donnees;
+}
 ?>
