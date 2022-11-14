@@ -7,7 +7,9 @@ $user_name = valid_donnees($_POST['name']);
 $user_mail =valid_donnees($_POST['mail']);
 $user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
 $user_password = valid_donnees($_POST['password']); 
+$user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 $user_passwordConfirm = valid_donnees($_POST['passwordconfirm']); 
+
 
 if(!empty($user_surname) && !empty($user_name) && !empty($user_mail) && !empty($user_password)){
 $etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail`, `mot de passe`) VALUES (:surname,:nom,:mail,:pass)");
@@ -15,7 +17,7 @@ $etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail
 $etat->bindValue(':surname', $user_surname,PDO::PARAM_STR);
 $etat->bindValue(':nom', $user_name,PDO::PARAM_STR);
 $etat->bindValue(':mail', $user_mail,PDO::PARAM_STR);
-$etat->bindValue(':pass', $user_password,PDO::PARAM_STR);
+$etat->bindValue(':pass', $user_password_hash,PDO::PARAM_STR);
 $etat->execute();
 
 

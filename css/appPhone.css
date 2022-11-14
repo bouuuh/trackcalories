@@ -334,13 +334,29 @@ div.change_poids > div.enter_poids {
     align-items: center;
 }
 
-div.change_poids > div.enter_poids > img {
-   height: 10%;
+div.change_poids > div.enter_poids > form > button {
+    width: 5vw;
+   height: 5vh;
    margin-top: 3vh;
    margin-left: 1vw;
+   border: 0;
+
 }
 
-div.change_poids > div.enter_poids > input {
+ div.change_poids > div.enter_poids > form > button > img{
+    height: 100%;
+    /* margin-top: 4vh; */
+    /* margin-left: 1vw; */
+    background-color: #A5305C;
+    border: 0;
+ }
+div.change_poids > div.enter_poids > form {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+div.change_poids > div.enter_poids > form > input {
     width: 30vw;
     height: 2vh;
     border-radius: 40px;

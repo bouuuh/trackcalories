@@ -14,6 +14,13 @@
         $etat->bindParam(':poids',$user_weight);
         $etat->bindParam(':id',$user_id);
         $etat->execute();  
+        $_SESSION["user"][] = [
+            "sexe" => $user_sexe,
+            "taille" => $user_height,
+            "poids" => $user_weight
+        ];
+        $etat = $base->prepare("INSERT INTO `calories`(`id-user`) VALUES (:id)");
+        $etat->bindParam(':id',$user_id);
         header('Location: inscription4Phone.php');
     }
     

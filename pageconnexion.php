@@ -12,10 +12,11 @@ if (!empty($user_mail) && !empty($user_password)) {
 $resultats = $etat->fetchAll();
 $mail_bdd = $resultats[0]['adresse mail'];
 $password_bdd = $resultats[0]['mot de passe'];
+var_dump ($resultats);
 
 
 if (!empty($resultats)) {
-    if ($password_bdd === $user_password) {
+    if ((password_verify($user_password, $password_bdd)) === $user_password) {
         echo "yes";
     }
 }
