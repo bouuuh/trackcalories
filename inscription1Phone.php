@@ -1,8 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 session_start();
 include('connexion.php');
 
-$user_surname = valid_donnees($_POST['surname']); 
+   $user_surname = valid_donnees($_POST['surname']); 
 $user_name = valid_donnees($_POST['name']); 
 $user_mail =valid_donnees($_POST['mail']);
 $user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
@@ -12,6 +14,7 @@ $user_passwordConfirm = valid_donnees($_POST['passwordconfirm']);
 
 
 if(!empty($user_surname) && !empty($user_name) && !empty($user_mail) && !empty($user_password)){
+ 
 $etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail`, `mot de passe`) VALUES (:surname,:nom,:mail,:pass)");
 
 $etat->bindValue(':surname', $user_surname,PDO::PARAM_STR);
@@ -27,7 +30,6 @@ $_SESSION["user"] = [
     "surname" => $user_surname,
     "name" => $user_name,
     "mail" => $user_mail,
-    "password" => $user_password
 ];
 header('Location: inscription2Phone.php');
 }
@@ -78,10 +80,7 @@ header('Location: inscription2Phone.php');
                 if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($user_password)){
                     echo '<p class="empty">Il manque une confirmation de mot de passe</p>';
                 };
-                if ($user_password != $user_passwordConfirm) {
-
-                    echo '<p class="empty">Les mots de passe sont différents</p>';
-                }
+                
                 ?>
                 <input type="password" name="passwordconfirm" placeholder="Confirmez votre mot de passe" >
                 <button class="next" type="submit" name="next">Suivant</button>
