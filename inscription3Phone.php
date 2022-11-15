@@ -1,27 +1,40 @@
 <?php
     session_start();
     include('connexion.php');
+
+    /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire*/
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        /*On récupère les infos du formulaire*/
         $user_sexe = valid_donnees($_POST['sexe']); 
         $user_dateofbirth = valid_donnees($_POST['dateofbirth']); 
         $user_height =valid_donnees($_POST['height']);
         $user_weight = valid_donnees($_POST['weight']); 
-    $user_id = $_SESSION['user']['id'];    
-    if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) {    
+        $user_id = $_SESSION['user']['id'];  
 
-        $etat = $base->prepare("UPDATE utilisateur SET `sexe`= :sexe,`date de naissance`= :naissance,`taille`= :taille,`poids`= :poids WHERE `id`= :id");
-        $etat->bindParam(':sexe',$user_sexe);
-        $etat->bindParam(':naissance',$user_dateofbirth);
-        $etat->bindParam(':taille',$user_height);
-        $etat->bindParam(':poids',$user_weight);
-        $etat->bindParam(':id',$user_id);
-        $etat->execute();  
-        $_SESSION["user"][] = [
-            "sexe" => $user_sexe,
-            "taille" => $user_height,
-            "poids" => $user_weight
+            /*On vérifie que les champs du formulaire ne soient pas vides*/
+            if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) {    
+                
+                /*Requête SQL pour mettre les infos du formulaire dans la BDD*/
+                $etat = $base->prepare("UPDATE utilisateur SET `sexe`= :sexe,`date de naissance`= :naissance,`taille`= :taille,`poids`= :poids WHERE `id`= :id");
+                $etat->bindParam(':sexe',$user_sexe);
+                $etat->bindParam(':naissance',$user_dateofbirth);
+                $etat->bindParam(':taille',$user_height);
+                $etat->bindParam(':poids',$user_weight);
+                $etat->bindParam(':id',$user_id);
+                $etat->execute();  
+                
+                /*On ajoute les informations de Session*/
+                $_SESSION["user"][] = [
+                    "sexe" => $user_sexe,
+                    "taille" => $user_height,
+                    "poids" => $user_weight
         ];
+        /*On va à la page suivante*/
         header('Location: inscription4Phone.php');
     }
+    }
+       
     
     
     ?>

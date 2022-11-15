@@ -1,47 +1,55 @@
 <?php
 session_start();
-
 include('connexion.php');
 
+/*On récupère la date du jour grâce à une fonction*/
 $DATEtoday = date('Y-m-d');
 
-    $etat = $base->prepare("SELECT * FROM `calories` WHERE (`date` =:date AND `id-user`=:id)");
-    $etat->bindParam(':date',$DATEtoday);
-    $etat->bindParam(':id',$_SESSION["user"]["id"]);
-    $etat->execute();
-    $resultats = $etat->fetchAll();
-    if (!empty($resultats)) {
-    $date = $resultats[0]['date'];
-    $user_calories_total = $resultats[0]['calories'];
-    }
-    
-   
-    if (isset($_POST['submit']) && !empty($_POST['calories'])) {
+/*On fait une requête SQL pour chercher si dans la BDD, il existe déjà une entrée pour les calories du jour de l'utilisateur*/
+$etat = $base->prepare("SELECT * FROM `calories` WHERE (`date` =:date AND `id-user`=:id)");
+$etat->bindParam(':date',$DATEtoday);
+$etat->bindParam(':id',$_SESSION["user"]["id"]);
+$etat->execute();
+$resultats = $etat->fetchAll();
+
+        /*Si il y a un des infos dans $resultats*/
+        if (!empty($resultats)) {
+        $date = $resultats[0]['date'];
+        $user_calories_total = $resultats[0]['calories'];
+        }
+
+        if (isset($_POST['submit']) && !empty($_POST['calories'])) {
         
-    $user_calories = valid_donnees($_POST['calories']);
-        if (!empty($date) && !empty($user_calories)) {
-            $user_calories_total = $user_calories + $resultats[0]['calories'];
-            $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories WHERE (`date` =:date AND `id-user`=:id)");
-            $etat->bindParam(':date',$DATEtoday);
-            $etat->bindParam(':calories', $user_calories_total);
-            $etat->bindParam(':id',$_SESSION["user"]["id"]);
-            $etat->execute();
-        } 
-        elseif(empty($resultats)&& !empty($user_calories)){
-            $etat = $base->prepare("INSERT INTO `calories`(`date`, `calories`, `id-user`) VALUES (:date,:calories,:id)");
-            $etat->bindParam(':date',$DATEtoday);
-            $etat->bindParam(':calories', $user_calories);
-            $etat->bindParam(':id', $_SESSION["user"]["id"]);
-            $etat->execute();
-            $user_calories_total = $user_calories;
-}
+            /*Si la date existe déjà, alors on ajoute les nouvelles calories à celle qui étaient déjà dans la BDD et on enregistre les infos dans la BDD*/   
+            $user_calories = valid_donnees($_POST['calories']);
+            if (!empty($date) && !empty($user_calories)) {
+                $user_calories_total = $user_calories + $resultats[0]['calories'];
+                $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories WHERE (`date` =:date AND `id-user`=:id)");
+                $etat->bindParam(':date',$DATEtoday);
+                $etat->bindParam(':calories', $user_calories_total);
+                $etat->bindParam(':id',$_SESSION["user"]["id"]);
+                $etat->execute();
+            } 
+
+            /*Si la date n'existe pas, on met les calories entrées dans les calories de la journée sur la BDD*/
+            elseif(empty($resultats)&& !empty($user_calories)){
+                $etat = $base->prepare("INSERT INTO `calories`(`date`, `calories`, `id-user`) VALUES (:date,:calories,:id)");
+                $etat->bindParam(':date',$DATEtoday);
+                $etat->bindParam(':calories', $user_calories);
+                $etat->bindParam(':id', $_SESSION["user"]["id"]);
+                $etat->execute();
+                $user_calories_total = $user_calories;
+    }
  }
 ?>
+
+/*On empêche le refresh de la page d'ajouter des informations dans le formulaire et donc d'augmenter les calories*/
 <script>
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
 </script>
+
 <!DOCTYPE html>
 <html lang="FR">
 <head>

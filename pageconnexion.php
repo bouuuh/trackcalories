@@ -1,45 +1,48 @@
 <?php
-
+session_start();
+session_destroy();
 include('connexion.php');
 
-$user_mail = valid_donnees($_POST['mail']);
-$user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
-$user_password = valid_donnees($_POST['password']); 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $user_mail = valid_donnees($_POST['mail']);
+    $user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
+    $user_password = valid_donnees($_POST['password']); 
 
 
-if (!empty($user_mail) && !empty($user_password)) {
+    if (!empty($user_mail) && !empty($user_password)) {
 
-    $etat = $base->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :adresse");
-    $etat->bindParam(':adresse',$user_mail);
-    $etat->execute();
-    $resultats = $etat->fetchAll();
-    $mail_bdd = $resultats[0]['adresse mail'];
-    $password_bdd = $resultats[0]['mot de passe'];
-    var_dump ($resultats);
-    
+        $etat = $base->prepare("SELECT * FROM `utilisateur` WHERE `adresse mail` = :adresse");
+        $etat->bindParam(':adresse',$user_mail);
+        $etat->execute();
+        $resultats = $etat->fetchAll();
+        $mail_bdd = $resultats[0]['adresse mail'];
+        $password_bdd = $resultats[0]['mot de passe'];
+        var_dump ($resultats);
+        
 
-    if (!empty($resultats)) {
-        if ((password_verify($user_password, $password_bdd))) {
-            session_start();
-            $_SESSION["user"] = [
-                "id" => $resultats[0]['id'],
-                "surname" => $resultats[0]['prenom'],
-                "name" => $resultats[0]['nom'],
-                "mail" => $resultats[0]['adresse mail'],
-            ];
-            $_SESSION["user"][] = [
-                "sexe" => $resultats[0]['sexe'],
-                "taille" => $resultats[0]['taille'],
-                "poids" => $resultats[0]['poids']
-            ];
-            header('Location: profilPhone1.php');
-          
+        if (!empty($resultats)) {
+            if ((password_verify($user_password, $password_bdd))) {
+                session_start();
+                $_SESSION["user"] = [
+                    "id" => $resultats[0]['id'],
+                    "surname" => $resultats[0]['prenom'],
+                    "name" => $resultats[0]['nom'],
+                    "mail" => $resultats[0]['adresse mail'],
+                ];
+                $_SESSION["user"][] = [
+                    "sexe" => $resultats[0]['sexe'],
+                    "taille" => $resultats[0]['taille'],
+                    "poids" => $resultats[0]['poids']
+                ];
+                header('Location: profilPhone1.php');
+            
+            }
         }
-    }
 
 
-}   
-
+    }   
+}
 
 ?>
 <!DOCTYPE html>
