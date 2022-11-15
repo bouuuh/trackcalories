@@ -4,12 +4,12 @@ $user = 'root';
 $password = '';
 
 /* Connexion 2 */
-$base = new PDO($dbb, $user, $password);
-// try {
-    
-// } catch (PDOException $exp) {
-//     echo 'erreur connexion' .$excep-> getMessage();
-// }
+
+try {
+    $base = new PDO($dbb, $user, $password);
+} catch (PDOException $exp) {
+    echo 'erreur connexion' .$excep-> getMessage();
+}
 
 function valid_donnees($donnees){
     $donnees = trim($donnees);

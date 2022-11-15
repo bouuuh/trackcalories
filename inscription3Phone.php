@@ -1,12 +1,13 @@
 <?php
     session_start();
     include('connexion.php');
-    $user_sexe = valid_donnees($_POST['sexe']); 
-    $user_dateofbirth = valid_donnees($_POST['dateofbirth']); 
-    $user_height =valid_donnees($_POST['height']);
-    $user_weight = valid_donnees($_POST['weight']); 
+     
     $user_id = $_SESSION['user']['id'];    
-    if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) {    
+    if (!empty($user_sexe) && !empty($user_dateofbirth) && !empty($user_height) && !empty($user_weight)) { 
+        $user_sexe = valid_donnees($_POST['sexe']); 
+        $user_dateofbirth = valid_donnees($_POST['dateofbirth']); 
+        $user_height =valid_donnees($_POST['height']);
+        $user_weight = valid_donnees($_POST['weight']);   
         $etat = $base->prepare("UPDATE utilisateur SET `sexe`= :sexe,`date de naissance`= :naissance,`taille`= :taille,`poids`= :poids WHERE `id`= :id");
         $etat->bindParam(':sexe',$user_sexe);
         $etat->bindParam(':naissance',$user_dateofbirth);
