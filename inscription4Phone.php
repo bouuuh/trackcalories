@@ -15,14 +15,14 @@ session_start();
 </head>
 <body>
     <div class="container4">
-        <a href="inscriptionPhone.php"><img src="img/arrowleft2.svg" alt="" class="arrowback"></a>
-        <div class="content2">
+        
+        <div class="content4">
         <?php
             echo "<p class='hello'>Bravo ".$_SESSION['user']['surname']."</p>";
             ?>
            <p class="almostdone">Ton inscription est terminée ! 
             Tu vas pouvoir maintenant avoir accès à l’application.</p>
-            <a href=""><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>
+            <a href="profilPhone1.php"><img src="img/arrowcircleright2.svg" alt="" class="arrownext"></a>
       
         </div> 
     <img class="logoinscription" src="img\Logorose.svg" alt="Track Calories logo">
