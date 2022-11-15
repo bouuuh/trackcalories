@@ -43,8 +43,8 @@ $resultats = $etat->fetchAll();
  }
 ?>
 
-/*On empêche le refresh de la page d'ajouter des informations dans le formulaire et donc d'augmenter les calories*/
-<script>
+
+<script>/*On empêche le refresh de la page d'ajouter des informations dans le formulaire et donc d'augmenter les calories*/
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
