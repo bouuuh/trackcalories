@@ -1,33 +1,47 @@
 <?php
-
 session_start();
+
 include('connexion.php');
-$user_calories = valid_donnees($_POST['calories']);
+
 $DATEtoday = date('Y-m-d');
 
-    $etat = $base->prepare("SELECT * FROM `calories` WHERE `date` = :date");
+    $etat = $base->prepare("SELECT * FROM `calories` WHERE (`date` =:date AND `id-user`=:id)");
     $etat->bindParam(':date',$DATEtoday);
+    $etat->bindParam(':id',$_SESSION["user"]["id"]);
     $etat->execute();
     $resultats = $etat->fetchAll();
+    if (!empty($resultats)) {
     $date = $resultats[0]['date'];
     $user_calories_total = $resultats[0]['calories'];
+    }
     
-if (!empty($date) && !empty($user_calories)) {
-    $user_calories_total = $user_calories + $resultats[0]['calories'];
-    $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories WHERE `date`= :date");
-    $etat->bindParam(':date',$DATEtoday);
-    $etat->bindParam(':calories', $user_calories_total);
-    $etat->execute();
-    } 
-elseif(empty($date)&& !empty($user_calories)){
-    $etat = $base->prepare("INSERT INTO `calories`(`date`, `calories`, `id-user`) VALUES (:date,:calories,:id)");
-    $etat->bindParam(':date',$DATEtoday);
-    $etat->bindParam(':calories', $user_calories_total);
-    $etat->bindParam(':id', $_SESSION["user"]["id"]);
-    $etat->execute();
+   
+    if (isset($_POST['submit']) && !empty($_POST['calories'])) {
+        
+    $user_calories = valid_donnees($_POST['calories']);
+        if (!empty($date) && !empty($user_calories)) {
+            $user_calories_total = $user_calories + $resultats[0]['calories'];
+            $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories WHERE (`date` =:date AND `id-user`=:id)");
+            $etat->bindParam(':date',$DATEtoday);
+            $etat->bindParam(':calories', $user_calories_total);
+            $etat->bindParam(':id',$_SESSION["user"]["id"]);
+            $etat->execute();
+        } 
+        elseif(empty($resultats)&& !empty($user_calories)){
+            $etat = $base->prepare("INSERT INTO `calories`(`date`, `calories`, `id-user`) VALUES (:date,:calories,:id)");
+            $etat->bindParam(':date',$DATEtoday);
+            $etat->bindParam(':calories', $user_calories);
+            $etat->bindParam(':id', $_SESSION["user"]["id"]);
+            $etat->execute();
+            $user_calories_total = $user_calories;
 }
-
+ }
 ?>
+<script>
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+</script>
 <!DOCTYPE html>
 <html lang="FR">
 <head>
@@ -38,6 +52,7 @@ elseif(empty($date)&& !empty($user_calories)){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&family=Work+Sans:wght@200;300;500;700&display=swap" rel="stylesheet">
+   
     <title>TrackCalories - Profil</title>
 </head>
 <body class="profil">
@@ -45,8 +60,12 @@ elseif(empty($date)&& !empty($user_calories)){
     <div class="encadre_imc">
         <p>Aujourd'hui vous êtes à :</p>
         <?php 
-              
-        echo "<p class='number_imc'>".$user_calories_total."</p>";
+        if (!empty($user_calories_total)) {
+           echo "<p class='number_imc'>".$user_calories_total."</p>";
+        }else{
+            echo "<p class='number_imc'>0</p>";
+        }
+        
         ?>
     </div>
     <div class="change_poids">
@@ -54,7 +73,7 @@ elseif(empty($date)&& !empty($user_calories)){
         <div class="enter_poids">
             <form action="" method="post">
                 <input name="calories" type="number">
-                <button type="submit"><img src="img/validation.png" alt=""></button>
+                <button name="submit" type="submit"><img src="img/validation.png" alt=""></button>
             <form>
         </div>
     </div>

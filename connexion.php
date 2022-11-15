@@ -1,7 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
-$user = 'greta';
-$password = 'Greta1234!';
+$user = 'root';
+$password = 'root';
 
 /* Connexion 2 */
 
