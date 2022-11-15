@@ -1,16 +1,17 @@
 <?php
 session_start();
 include('connexion.php');
-$user_new_weight = valid_donnees($_POST['newWeight']);
+
+
 $user_id = $_SESSION['user']['id'];  
 if(!empty($user_new_weight) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+    $user_new_weight = valid_donnees($_POST['newWeight']);
     $etat = $base->prepare("UPDATE `utilisateur` SET `poids`=:poids WHERE `id`= :id");
     $etat->bindParam(':poids', $user_new_weight);
     $etat->bindParam(':id', $user_id);
     $etat->execute();
     $_SESSION['user'][0]['poids'] = $user_new_weight; 
 }
-
 
 ?>
 <!DOCTYPE html>

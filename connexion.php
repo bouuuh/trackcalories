@@ -1,15 +1,17 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
 $user = 'root';
-$password = '';
+$password = 'root';
 
 /* Connexion 2 */
-$base = new PDO($dbb, $user, $password);
-// try {
-    
-// } catch (PDOException $exp) {
-//     echo 'erreur connexion' .$excep-> getMessage();
-// }
+
+try {
+    $base = new PDO($dbb, $user, $password);
+} catch (PDOException $exp) {
+    echo 'erreur connexion' .$excep-> getMessage();
+}
 
 function valid_donnees($donnees){
     $donnees = trim($donnees);
