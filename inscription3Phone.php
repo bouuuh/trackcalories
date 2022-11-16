@@ -2,6 +2,7 @@
     session_start();
     include('connexion.php');
 
+
     /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire*/
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -29,6 +30,7 @@
                     "sexe" => $user_sexe,
                     "taille" => $user_height,
                     "poids" => $user_weight
+
         ];
         /*On va à la page suivante*/
         header('Location: inscription4Phone.php');
