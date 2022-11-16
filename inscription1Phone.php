@@ -1,38 +1,40 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 session_start();
 include('connexion.php');
 
-   $user_surname = valid_donnees($_POST['surname']); 
-$user_name = valid_donnees($_POST['name']); 
-$user_mail =valid_donnees($_POST['mail']);
-$user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
-$user_password = valid_donnees($_POST['password']); 
-$user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
-$user_passwordConfirm = valid_donnees($_POST['passwordconfirm']); 
+/*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire*/
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    /*On récupère les infos du formulaire*/
+    $user_surname = valid_donnees($_POST['surname']); 
+    $user_name = valid_donnees($_POST['name']); 
+    $user_mail =valid_donnees($_POST['mail']);
+    $user_mail = filter_var($user_mail, FILTER_VALIDATE_EMAIL);
+    $user_password = valid_donnees($_POST['password']); 
+    $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
+    $user_passwordConfirm = valid_donnees($_POST['passwordconfirm']); 
 
+        /*On vérifie que les champs du formulaire ne soient pas vides*/
+        if(!empty($user_surname) && !empty($user_name) && !empty($user_mail) && !empty($user_password)){
 
-if(!empty($user_surname) && !empty($user_name) && !empty($user_mail) && !empty($user_password)){
- 
-$etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail`, `mot de passe`) VALUES (:surname,:nom,:mail,:pass)");
+            /*Requête SQL pour mettre les infos du formulaire dans la BDD*/
+            $etat = $base->prepare("INSERT INTO `utilisateur`(`prenom`, `nom`, `adresse mail`, `mot de passe`) VALUES (:surname,:nom,:mail,:pass)");
+            $etat->bindValue(':surname', $user_surname,PDO::PARAM_STR);
+            $etat->bindValue(':nom', $user_name,PDO::PARAM_STR);
+            $etat->bindValue(':mail', $user_mail,PDO::PARAM_STR);
+            $etat->bindValue(':pass', $user_password_hash,PDO::PARAM_STR);
+            $etat->execute();
 
-$etat->bindValue(':surname', $user_surname,PDO::PARAM_STR);
-$etat->bindValue(':nom', $user_name,PDO::PARAM_STR);
-$etat->bindValue(':mail', $user_mail,PDO::PARAM_STR);
-$etat->bindValue(':pass', $user_password_hash,PDO::PARAM_STR);
-$etat->execute();
-
-
-$id = $base->lastInsertId();
-$_SESSION["user"] = [
-    "id" => $id,
-    "surname" => $user_surname,
-    "name" => $user_name,
-    "mail" => $user_mail,
-];
-header('Location: inscription2Phone.php');
-}
+            /*On récupère le dernier id utilisé et on ajoute les informations de Session*/
+            $id = $base->lastInsertId();
+            $_SESSION["user"] = [
+                "id" => $id,
+                "surname" => $user_surname,
+                "name" => $user_name,
+                "mail" => $user_mail,
+            ];
+            /*On va à la page suivante*/
+            header('Location: inscription2Phone.php');
+}}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
