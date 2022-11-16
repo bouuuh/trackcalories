@@ -9,26 +9,25 @@ $user_new_weight = valid_donnees($_POST['newWeight']);
 /*On vérifie si la session existe, si c'est le cas, on continue sur la page, sinon on est envoyé sur la page notconnected.php*/
 if ($_SESSION['user'] === NULL) {
     header('Location: notconnected.php');
-}
-else{
-      
-
-        /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire et que l'input où on peut ajouter un nouveau poids n'est pas vide*/
-        if(!empty($user_new_weight) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+} else {
 
 
-            /*On fait une requête SQL afin de changer le poids de l'utilisateur par ce qu'il vient d'entrer dans la BDD*/
-            $etat = $base->prepare("UPDATE `utilisateur` SET `poids`=:poids WHERE `id`= :id");
-            $etat->bindParam(':poids', $user_new_weight);
-            $etat->bindParam(':id', $user_id);
-            $etat->execute();
-            $_SESSION['user'][0]['poids'] = $user_new_weight; 
-        }
+    /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire et que l'input où on peut ajouter un nouveau poids n'est pas vide*/
+    if (!empty($user_new_weight) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
+
+        /*On fait une requête SQL afin de changer le poids de l'utilisateur par ce qu'il vient d'entrer dans la BDD*/
+        $etat = $base->prepare("UPDATE `utilisateur` SET `poids`=:poids WHERE `id`= :id");
+        $etat->bindParam(':poids', $user_new_weight);
+        $etat->bindParam(':id', $user_id);
+        $etat->execute();
+        $_SESSION['user'][0]['poids'] = $user_new_weight;
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="FR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,38 +38,40 @@ else{
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&family=Work+Sans:wght@200;300;500;700&display=swap" rel="stylesheet">
     <title>TrackCalories - Profil</title>
 </head>
+
 <body class="profil">
     <a href="pageconnexion.php"><img style="height: 2vh;" src="img\out.svg" alt=""></a>
     <img class="logoinscription3" src="img/Logo.svg">
     <?php
-            echo "<p>Bonjour <span>".$_SESSION['user']['surname']."</span> :)</p>";
-            ?>
-  
+    echo "<p>Bonjour <span>" . $_SESSION['user']['surname'] . "</span> :)</p>";
+    ?>
+
     <div class="encadre_imc">
         <p>Votre IMC est de :</p>
-        <?php 
-        $imc = number_format(($_SESSION['user'][0]['poids']) / (($_SESSION['user'][0]['taille']* 0.01)*($_SESSION['user'][0]['taille']* 0.01)),1);
-        
-        echo "<p class='number_imc'>".$imc."</p>";
+        <?php
+        $imc = number_format(($_SESSION['user'][0]['poids']) / (($_SESSION['user'][0]['taille'] * 0.01) * ($_SESSION['user'][0]['taille'] * 0.01)), 1);
+
+        echo "<p class='number_imc'>" . $imc . "</p>";
         ?>
-        
+
     </div>
     <p>Conseil : reprend une part de gâteau, tu as de la marge :)</p>
     <div class="change_poids">
         <p>Ton poids a changé ?</p>
         <div class="enter_poids">
             <form action="" method="post">
-            <input type="number" name="newWeight">
-            <button type="submit"><img src="img/validation.png" alt=""></button>
-        </form>
+                <input type="number" name="newWeight">
+                <button type="submit"><img src="img/validation.png" alt=""></button>
+            </form>
         </div>
     </div>
     <div class="nav_profil">
         <div class="logo_profil">
-        <a href="profilPhone1.php"><img src="img/logo_user_green.png" alt=""></a>
+            <a href="profilPhone1.php"><img src="img/logo_user_green.png" alt=""></a>
             <a href="profilcaloriesPhone.php"><img src="img/logo_calculate_green.png" alt=""></a>
             <a href="profilGraph.php"><img src="img/logo_graph_green.png" alt=""></a>
         </div>
     </div>
 </body>
+
 </html>
