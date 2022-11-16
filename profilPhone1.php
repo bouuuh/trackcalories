@@ -1,19 +1,21 @@
 <?php
 session_start();
 include('connexion.php');
+$user_id = $_SESSION['user']['id'];
+
+/*On récupère le poids du formulaire*/
+$user_new_weight = valid_donnees($_POST['newWeight']);
 
 /*On vérifie si la session existe, si c'est le cas, on continue sur la page, sinon on est envoyé sur la page notconnected.php*/
 if ($_SESSION['user'] === NULL) {
     header('Location: notconnected.php');
 }
 else{
-    $user_id = $_SESSION['user']['id'];  
+      
 
         /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire et que l'input où on peut ajouter un nouveau poids n'est pas vide*/
         if(!empty($user_new_weight) && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
-            /*On récupère le poids du formulaire*/
-            $user_new_weight = valid_donnees($_POST['newWeight']);
 
             /*On fait une requête SQL afin de changer le poids de l'utilisateur par ce qu'il vient d'entrer dans la BDD*/
             $etat = $base->prepare("UPDATE `utilisateur` SET `poids`=:poids WHERE `id`= :id");
