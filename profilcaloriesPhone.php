@@ -11,11 +11,16 @@ $DATEminus4 = date('Y-m-d', strtotime($DATEtoday . ' - 4 days'));
 $DATEminus3 = date('Y-m-d', strtotime($DATEtoday . ' - 3 days'));
 $DATEminus2 = date('Y-m-d', strtotime($DATEtoday . ' - 2 days'));
 $DATEminus1 = date('Y-m-d', strtotime($DATEtoday . ' - 1 days'));
-$datechosen = $DATEtoday;
+$_SESSION['datechosen'];
+
+if (($_SESSION['datechosen'])=== NULL) {
+    $_SESSION['datechosen'] = $DATEtoday;
+}
+
 
 /*On fait une requête SQL pour chercher si dans la BDD, il existe déjà une entrée pour les calories du jour de l'utilisateur*/
 $etat = $base->prepare("SELECT * FROM `calories` WHERE (`date` =:date AND `id-user`=:id)");
-$etat->bindParam(':date', $DATEtoday);
+$etat->bindParam(':date', $_SESSION['datechosen']);
 $etat->bindParam(':id', $_SESSION["user"]["id"]);
 $etat->execute();
 $resultats = $etat->fetchAll();
@@ -32,30 +37,33 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
     $user_calories = valid_donnees($_POST['calories']);
     if (!empty($date) && !empty($user_calories)) {
         $user_calories_total = $user_calories + $resultats[0]['calories'];
-        $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories,`dateminus7`=:date7,`dateminus6`=:date6,
-                `dateminus5`=:date5,`dateminus4`=:date4,`dateminus3`=:date3,`dateminus2`=:date2,`dateminus1`=:date1 WHERE (`date` =:date AND `id-user`=:id)");
-        $etat->bindParam(':date', $DATEtoday);
-        $etat->bindParam(':date7', $DATEminus7);
-        $etat->bindParam(':date6', $DATEminus6);
-        $etat->bindParam(':date5', $DATEminus5);
-        $etat->bindParam(':date4', $DATEminus4);
-        $etat->bindParam(':date3', $DATEminus3);
-        $etat->bindParam(':date2', $DATEminus2);
-        $etat->bindParam(':date1', $DATEminus1);
+        $etat = $base->prepare("UPDATE `calories` SET `calories`=:calories WHERE (`date` =:date AND `id-user`=:id)");
+        $etat->bindParam(':date', $date);
+        $etat->bindParam(':calories', $user_calories_total);
+        $etat->bindParam(':id', $_SESSION["user"]["id"]);
+        $etat->execute();
+        $etat = $base->prepare("UPDATE `utilisateur` SET `calochosen`=:calories WHERE `id`=:id");
         $etat->bindParam(':calories', $user_calories_total);
         $etat->bindParam(':id', $_SESSION["user"]["id"]);
         $etat->execute();
     }
 
-    /*Si la date n'existe pas, on met les calories entrées dans les calories de la journée sur la BDD*/ elseif (empty($resultats) && !empty($user_calories)) {
+    /*Si la date n'existe pas, on met les calories entrées dans les calories de la journée sur la BDD*/ 
+    elseif (empty($resultats) && !empty($user_calories)) {
         $etat = $base->prepare("INSERT INTO `calories`(`date`, `calories`, `id-user`) VALUES (:date,:calories,:id)");
-        $etat->bindParam(':date', $DATEtoday);
+        $etat->bindParam(':date', $_SESSION["datechosen"]);
         $etat->bindParam(':calories', $user_calories);
         $etat->bindParam(':id', $_SESSION["user"]["id"]);
         $etat->execute();
         $user_calories_total = $user_calories;
+        $etat = $base->prepare("UPDATE `utilisateur` SET `calochosen`=:calories WHERE `id`=:id");
+        $etat->bindParam(':calories', $user_calories_total);
+        $etat->bindParam(':id', $_SESSION["user"]["id"]);
+        $etat->execute();
     }
 }
+
+
 
 
 ?>
@@ -85,7 +93,7 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
 
 <body class="profil">
     <img class="logoinscription4" src="img/Logo.svg">
-    <div class="enter_poids">
+    <div class="enter_date">
         <form action="date.php" method="post">
             <input type="date" id="start" name="start" <?php echo 'value="' .$_SESSION['datechosen']. '"' ?> <?php echo 'min="' . $DATEminus7 . '"' ?> <?php echo 'max="' . $DATEtoday . '"' ?>">
             <button name="date" type="submit"><img src="img/validation.png" alt=""></button>
