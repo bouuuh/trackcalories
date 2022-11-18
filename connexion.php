@@ -5,8 +5,8 @@
 
 /* Connexion à la BDD */
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
-$user = 'root';
-$password = 'root';
+$user = 'greta';
+$password = 'Greta1234!';
 try {
     $base = new PDO($dbb, $user, $password);
 } catch (PDOException $exp) {

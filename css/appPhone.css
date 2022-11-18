@@ -318,7 +318,7 @@ div.encadre_imc > p {
 }
 
 div.encadre_imc > p.number_imc {
-    color:#A5305C;
+    color: #869B08;
     font-size: 40px;
     margin-top: 1.5vh;
 }
@@ -428,3 +428,35 @@ div.nav_profil > div.logo_profil {
 .content4{
     padding-top: 26vh;
 }
+canvas{
+    margin-left: 5vw;
+    margin-right: 5vw;
+    height: 60vh!important;
+}
+
+.graphique{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+@media (max-width: 800px) { 
+    canvas{
+       margin : 0;
+       height: 60vh!important;
+    }
+    }
+
+@media (max-width: 600px) { 
+    canvas{
+       margin : 0;
+       height: 50vh!important;
+    }
+    }
+
+@media (max-width: 500px) { 
+ canvas{
+    margin : 0;
+    height: 40vh!important;
+ }
+ }

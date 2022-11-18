@@ -1,3 +1,6 @@
+var variableRecuperee = <?php echo json_encode($variableAPasser); ?>;
+
+
 const lineCanvas = document.getElementById("lineCanvas");
 
 const lineChart = new Chart(lineCanvas, {

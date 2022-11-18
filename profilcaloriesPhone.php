@@ -2,6 +2,10 @@
 session_start();
 include('connexion.php');
 
+/*On vérifie si la session existe, si c'est le cas, on continue sur la page, sinon on est envoyé sur la page notconnected.php*/
+if ($_SESSION['user'] === NULL) {
+    header('Location: notconnected.php');
+} else {
 /*On récupère la date du jour grâce à une fonction*/
 $DATEtoday = date('Y-m-d');
 $DATEminus7 = date('Y-m-d', strtotime($DATEtoday . ' - 7 days'));
@@ -63,7 +67,7 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
     }
 }
 
-
+}
 
 
 ?>
@@ -92,6 +96,7 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
 </head>
 
 <body class="profil">
+<a href="pageconnexion.php"><img style="height: 2vh;" src="img\out.svg" alt=""></a>
     <img class="logoinscription4" src="img/Logo.svg">
     <div class="enter_date">
         <form action="date.php" method="post">
@@ -127,5 +132,17 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
         </div>
     </div>
 </body>
+    <script>
+        var sexe = <?php echo json_encode($_SESSION['user'][0]['sexe']); ?>;
+        var number_calorie = <?php echo json_encode($user_calories_total); ?>;
+        var calories = document.querySelector('.number_imc');
+        
 
+        if (sexe === '1' && number_calorie>2500) {
+            calories.style.color = '#A5305C';
+        }
+        else if (sexe === '2' && number_calorie>2000) {
+            calories.style.color = '#A5305C';
+        }
+    </script>
 </html>

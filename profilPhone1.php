@@ -37,6 +37,7 @@ if ($_SESSION['user'] === NULL) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;500;700&family=Work+Sans:wght@200;300;500;700&display=swap" rel="stylesheet">
     <title>TrackCalories - Profil</title>
+
 </head>
 
 <body class="profil">
@@ -55,7 +56,7 @@ if ($_SESSION['user'] === NULL) {
         ?>
 
     </div>
-    <p>Conseil : reprend une part de gâteau, tu as de la marge :)</p>
+    <p class="conseil" >Conseil : reprend une part de gâteau, tu as de la marge :)</p>
     <div class="change_poids">
         <p>Ton poids a changé ?</p>
         <div class="enter_poids">
@@ -73,5 +74,27 @@ if ($_SESSION['user'] === NULL) {
         </div>
     </div>
 </body>
+<script>
+        var divImc = document.querySelector('.number_imc');
+        var conseil = document.querySelector('.conseil');
 
+        var imc = <?php echo json_encode($imc) ?>;
+        if (imc<18.5) {
+            divImc.style.color = 'grey';
+            conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
+        }
+        else if (imc<25) {
+            divImc.style.color = '#869B08';
+            conseil.innerText = "Conseil : Garde le cap !";
+        }
+        else if (imc<30) {
+            divImc.style.color = '#e28213';
+            conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
+        }
+        else if (imc>30.1) {
+            divImc.style.color = '#A5305C';
+            conseil.innerText = "Conseil : Prends rendez-vous avec un nutritioniste, ça peut être dangereux pour ta santé";
+        }
+
+    </script>
 </html>
