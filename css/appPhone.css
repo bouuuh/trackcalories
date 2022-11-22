@@ -340,7 +340,7 @@ div.enter_date{
     align-items: center;
 }
 div.enter_date > form > button {
-    width: 5vw;
+   
    height: 5vh;
    margin-top: 3vh;
    margin-left: 1vw;
@@ -370,7 +370,7 @@ div.enter_date > form {
     }
 
 div.change_poids > div.enter_poids > form > button {
-    width: 5vw;
+   
    height: 5vh;
    margin-top: 3vh;
    margin-left: 1vw;
