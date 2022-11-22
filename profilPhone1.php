@@ -3,15 +3,15 @@ session_start();
 include('connexion.php');
 $user_id = $_SESSION['user']['id'];
 
-/*On récupère le poids du formulaire*/
-$user_new_weight = valid_donnees($_POST['newWeight']);
 
 /*On vérifie si la session existe, si c'est le cas, on continue sur la page, sinon on est envoyé sur la page notconnected.php*/
 if ($_SESSION['user'] === NULL) {
     header('Location: notconnected.php');
 } else {
 
-
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+/*On récupère le poids du formulaire*/
+$user_new_weight = valid_donnees($_POST['newWeight']);
     /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire et que l'input où on peut ajouter un nouveau poids n'est pas vide*/
     if (!empty($user_new_weight) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -23,7 +23,7 @@ if ($_SESSION['user'] === NULL) {
         $etat->execute();
         $_SESSION['user'][0]['poids'] = $user_new_weight;
     }
-}
+}}
 ?>
 <!DOCTYPE html>
 <html lang="FR">

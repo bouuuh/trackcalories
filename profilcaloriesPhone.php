@@ -15,7 +15,7 @@ $DATEminus4 = date('Y-m-d', strtotime($DATEtoday . ' - 4 days'));
 $DATEminus3 = date('Y-m-d', strtotime($DATEtoday . ' - 3 days'));
 $DATEminus2 = date('Y-m-d', strtotime($DATEtoday . ' - 2 days'));
 $DATEminus1 = date('Y-m-d', strtotime($DATEtoday . ' - 1 days'));
-$_SESSION['datechosen'];
+
 
 if (($_SESSION['datechosen'])=== NULL) {
     $_SESSION['datechosen'] = $DATEtoday;
@@ -136,8 +136,7 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
         var sexe = <?php echo json_encode($_SESSION['user'][0]['sexe']); ?>;
         var number_calorie = <?php echo json_encode($user_calories_total); ?>;
         var calories = document.querySelector('.number_imc');
-        
-
+        console.log(number_calorie);
         if (sexe === '1' && number_calorie>2500) {
             calories.style.color = '#A5305C';
         }

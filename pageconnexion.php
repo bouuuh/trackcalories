@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultats = $etat->fetchAll();
         $mail_bdd = $resultats[0]['adresse mail'];
         $password_bdd = $resultats[0]['mot de passe'];
-        var_dump($resultats);
+       
 
 
         if (!empty($resultats)) {

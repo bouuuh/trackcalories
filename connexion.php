@@ -1,7 +1,7 @@
 <?php
 /*Montre les erreurs sur MAMP*/
-// error_reporting(E_ALL);
-// ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 /* Connexion à la BDD */
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
