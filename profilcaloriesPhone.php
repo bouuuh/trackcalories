@@ -137,10 +137,10 @@ if (isset($_POST['poids']) && !empty($_POST['calories'])) {
         var number_calorie = <?php echo json_encode($user_calories_total); ?>;
         var calories = document.querySelector('.number_imc');
         console.log(number_calorie);
-        if (sexe === '1' && number_calorie>2500) {
+        if (sexe === 1 && number_calorie>2500) {
             calories.style.color = '#A5305C';
         }
-        else if (sexe === '2' && number_calorie>2000) {
+        else if (sexe === 2 && number_calorie>2000) {
             calories.style.color = '#A5305C';
         }
     </script>
