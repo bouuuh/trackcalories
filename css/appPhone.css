@@ -493,4 +493,17 @@ canvas{
 .next{
     width: 40vw;
     }
+    .logoinscription3{
+        margin-top: 2vh;
+        margin-bottom: 5vh;
+    }
+    div.encadre_imc {
+        margin: 5vh auto;
+    }
+    div.change_poids {
+        margin: 5vh auto 0 auto;
+    }
+    .logoinscription4{
+        margin-bottom: 5vh;
+    }
  }
