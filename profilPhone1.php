@@ -3,7 +3,6 @@ session_start();
 include('connexion.php');
 $user_id = $_SESSION['user']['id'];
 
-
 /*On vérifie si la session existe, si c'est le cas, on continue sur la page, sinon on est envoyé sur la page notconnected.php*/
 if ($_SESSION['user'] === NULL) {
     header('Location: notconnected.php');
@@ -44,7 +43,7 @@ $user_new_weight = valid_donnees($_POST['newWeight']);
     <a href="pageconnexion.php"><img style="height: 2vh;" src="img\out.svg" alt=""></a>
     <img class="logoinscription3" src="img/Logo.svg">
     <?php
-    echo "<p>Bonjour <span>" . $_SESSION['user']['surname'] . "</span> :)</p>";
+    echo "<p>Bonjour <span>" . $_SESSION['user']['surname'] . "</span>, tu as " .$_SESSION["user"][0]['age'] ." ans :)</p>";
     ?>
 
     <div class="encadre_imc">
@@ -79,22 +78,82 @@ $user_new_weight = valid_donnees($_POST['newWeight']);
         var conseil = document.querySelector('.conseil');
 
         var imc = <?php echo json_encode($imc) ?>;
-        if (imc<18.5) {
+        var age = <?php echo json_encode($_SESSION['user'][0]['age']) ?>;
+
+        if (age<=24){
+        if (imc<=19) {
             divImc.style.color = 'grey';
             conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
         }
-        else if (imc<25) {
+        else if (imc<=24) {
             divImc.style.color = '#869B08';
             conseil.innerText = "Conseil : Garde le cap !";
         }
-        else if (imc<30) {
+        else if (imc>=24.1) {
             divImc.style.color = '#e28213';
             conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
         }
-        else if (imc>30.1) {
-            divImc.style.color = '#A5305C';
-            conseil.innerText = "Conseil : Prends rendez-vous avec un nutritioniste, ça peut être dangereux pour ta santé";
+        
         }
 
+        else if (age<=34){
+        if (imc<=20) {
+            divImc.style.color = 'grey';
+            conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
+        }
+        else if (imc<=25) {
+            divImc.style.color = '#869B08';
+            conseil.innerText = "Conseil : Garde le cap !";
+        }
+        else if (imc>=25.1) {
+            divImc.style.color = '#e28213';
+            conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
+        }
+        }
+
+        else if (age<=44){
+        if (imc<=21) {
+            divImc.style.color = 'grey';
+            conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
+        }
+        else if (imc<=26) {
+            divImc.style.color = '#869B08';
+            conseil.innerText = "Conseil : Garde le cap !";
+        }
+        else if (imc>=26.1) {
+            divImc.style.color = '#e28213';
+            conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
+        }
+        }
+
+        else if (age<=54){
+        if (imc<=22) {
+            divImc.style.color = 'grey';
+            conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
+        }
+        else if (imc<=27) {
+            divImc.style.color = '#869B08';
+            conseil.innerText = "Conseil : Garde le cap !";
+        }
+        else if (imc>=27.1) {
+            divImc.style.color = '#e28213';
+            conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
+        }
+        }
+
+        else if (age>=55){
+        if (imc<=23) {
+            divImc.style.color = 'grey';
+            conseil.innerText = "Conseil : Reprends une part de gâteau, tu as de la marge :)";
+        }
+        else if (imc<=28) {
+            divImc.style.color = '#869B08';
+            conseil.innerText = "Conseil : Garde le cap !";
+        }
+        else if (imc>=28.1) {
+            divImc.style.color = '#e28213';
+            conseil.innerText = "Conseil : Essaye de faire attention frérot, privilégie une alimentation moins riche";
+        }
+        }
     </script>
 </html>

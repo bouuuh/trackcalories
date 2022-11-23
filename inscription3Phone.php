@@ -1,7 +1,7 @@
 <?php
     session_start();
     include('connexion.php');
-
+$DATEtoday = date('Y-m-d');
 
     /*On ne fait le prosessus qui suit que si quelqu'un envoie les infos du formulaire*/
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,6 +9,8 @@
         /*On récupère les infos du formulaire*/
         $user_sexe = valid_donnees($_POST['sexe']); 
         $user_dateofbirth = valid_donnees($_POST['dateofbirth']); 
+        $user_age = date_diff(date_create($user_dateofbirth), date_create($DATEtoday));
+        $user_age = $user_age->format('%y');
         $user_height =valid_donnees($_POST['height']);
         $user_weight = valid_donnees($_POST['weight']); 
         $user_id = $_SESSION['user']['id'];  
@@ -28,6 +30,7 @@
                 /*On ajoute les informations de Session*/
                 $_SESSION["user"][] = [
                     "sexe" => $user_sexe,
+                    "age" => $user_age,
                     "taille" => $user_height,
                     "poids" => $user_weight
 
@@ -66,7 +69,7 @@
             </div>
             <div class="birth">
                 <label for="dateofbirth">Date de Naissance</label>
-                <input type="text" name="dateofbirth"> 
+                <input type="date" name="dateofbirth"> 
             </div>
             <div class="height">
                 <label for="height">Taille (cm)</label>

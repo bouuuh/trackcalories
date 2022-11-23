@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($resultats)) {
             if ((password_verify($user_password, $password_bdd))) {
                 session_start();
+                $user_dateofbirth = $resultats[0]['date de naissance'];
+                $user_age = date_diff(date_create($user_dateofbirth), date_create($DATEtoday));
+                $user_age = $user_age->format('%y');
                 $_SESSION["user"] = [
                     "id" => $resultats[0]['id'],
                     "surname" => $resultats[0]['prenom'],
@@ -32,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
                 $_SESSION["user"][] = [
                     "sexe" => $resultats[0]['sexe'],
+                    "age" => $user_age,
                     "taille" => $resultats[0]['taille'],
                     "poids" => $resultats[0]['poids']
                 ];

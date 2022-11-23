@@ -5,7 +5,7 @@ ini_set("display_errors", 1);
 
 /* Connexion à la BDD */
 $dbb = 'mysql:host=localhost:3306;dbname=track-calories';
-$user = 'greta';
+$user = 'greta2';
 $password = 'Greta1234!';
 try {
     $base = new PDO($dbb, $user, $password);
