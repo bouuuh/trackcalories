@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form action="" method="post">
                     <input type="mail" name="mail" placeholder="Entrez votre adresse mail">
                     <input type="password" name="password" placeholder="Entrez votre mot de passe">
-                    <p class="mdpforgotten">mot de passe oublié ?</p>
                     <button class="connect" type="submit">Connexion</button>
                 </form>
             </div>
